@@ -1,0 +1,25 @@
+from customtkinter import CTkFont
+
+#colors
+BG_COLOR = '#c0ffee'
+TEXT_COLOR="#383838"
+ACCENT_COLOR="#6d9c90"
+HOVER_COLOR_DARK = "#5e877d"
+HOVER_COLOR_LIGHT = "#8ea39e"
+
+
+#window dimensions
+WINDOW_HEIIGHT = 1000
+WINDOW_WIDTH = 800
+
+MIN_WIDTH = 500
+MIN_HEIGHT = 600
+
+MAX_WIDTH = 1600
+MAX_HEIGHT = 1920
+
+#window properties
+RESIZABLE = (True, True)
+
+#other
+MAX_INPUT_LENGTH = 28
