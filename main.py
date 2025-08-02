@@ -24,6 +24,12 @@ class App(ctk.CTk):
         self.title('Currency converter')
         self.resizable(RESIZABLE[0], RESIZABLE[1])
 
+        #fonts
+        self.title_font = CTkFont('Arial', 48, 'bold')
+        self.heading_font = CTkFont('Arial', 32, 'bold')
+        self.widget_font = CTkFont('Arial', 28, 'normal')
+        self.output_font = ctk.CTkFont('Trebuchet MS', 36, 'bold')
+        
         #get current exchange rates from api
         self.get_current_exchange_rates()
 
@@ -48,7 +54,7 @@ class App(ctk.CTk):
         self.target_currency.trace_add('write', self.update_values)
 
         #scaling
-        self.bind('<Configure>', self.resize_elements)
+        self.bind('<Configure>', self._on_configure)
         
         #Run
         self.mainloop()
@@ -70,10 +76,10 @@ class App(ctk.CTk):
         self.rowconfigure((0,1,2,3), weight=1, uniform='a')
 
     def create_widgets(self):
-        Title_Frame(self)
-        Amount_Input(self, self.user_input)
-        Currency_selector(self, self.currencies, self.starting_currency, self.target_currency, self.swap_currencies)
-        Output_value_frame(self, self.output_string)
+        Title_Frame(self, self.title_font)
+        Amount_Input(self, self.user_input, self.heading_font, self.widget_font)
+        Currency_selector(self, self.currencies, self.starting_currency, self.target_currency, self.swap_currencies, self.heading_font, self.widget_font)
+        self.output_value_frame = Output_value_frame(self, self.output_string, self.output_font)
 
     def validate_input(self, *args):
         current = self.user_input.get()
@@ -119,9 +125,23 @@ class App(ctk.CTk):
 
         self.update_values()
 
-    def resize_elements(self, event):
-        print('resizing', event)
-        
+    def scale_fonts(self):
+        new_title_size = min(max(24, int(self.winfo_width() * 0.075)), 72)
+        new_heading_size = min(max(24, int(self.winfo_width() * 0.05)), 36)
+        new_output_size = min(max(24, int(self.winfo_width() * 0.05)), 40)
+        new_widget_size = min(max(18, int(self.winfo_width() * 0.04)), 32)
+
+        self.title_font.configure(size = new_title_size)
+        self.output_font.configure(size = new_output_size)
+        self.heading_font.configure(size = new_heading_size)
+        self.widget_font.configure(size = new_widget_size)
+
+        self.update_idletasks()
+
+    def _on_configure(self, event):
+        if event.widget == self:
+            self.scale_fonts()
+            
 
 if __name__ == '__main__':
     App()
