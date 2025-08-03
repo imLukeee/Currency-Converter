@@ -1,5 +1,4 @@
 import customtkinter as ctk
-import tkinter
 import requests
 from settings import *
 from ui_elements import *
@@ -25,9 +24,9 @@ class App(ctk.CTk):
         self.resizable(RESIZABLE[0], RESIZABLE[1])
 
         #fonts
-        self.title_font = CTkFont('Arial', 48, 'bold')
-        self.heading_font = CTkFont('Arial', 32, 'bold')
-        self.widget_font = CTkFont('Arial', 28, 'normal')
+        self.title_font = ctk.CTkFont('Arial', 48, 'bold')
+        self.heading_font = ctk.CTkFont('Arial', 32, 'bold')
+        self.widget_font = ctk.CTkFont('Arial', 28, 'normal')
         self.output_font = ctk.CTkFont('Trebuchet MS', 36, 'bold')
         
         #get current exchange rates from api

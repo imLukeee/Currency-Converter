@@ -1,5 +1,3 @@
-from customtkinter import CTkFont
-
 #colors
 BG_COLOR = '#c0ffee'
 TEXT_COLOR="#383838"
